@@ -12,6 +12,17 @@ public class MainController {
     private UserRepo userRepo;
     @Autowired
     private TweetsRepo tweetsRepo;
+    @Autowired
+    private FollowsRepo followsRepo;
+
+    @PostMapping("/follow")
+    public @ResponseBody String addFollow(@RequestParam Long users_master,@RequestParam Long users_follow){
+        Follows f = new Follows();
+        f.setUsers_master(users_master);
+        f.setUsers_follow(users_follow);
+        followsRepo.save(f);
+        return "Seguidos";
+    }
 
     @PostMapping("/add")
     public @ResponseBody String addNewUser (@RequestParam String username){
