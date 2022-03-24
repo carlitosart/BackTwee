@@ -14,6 +14,8 @@ public class MainController {
     private TweetsRepo tweetsRepo;
     @Autowired
     private FollowsRepo followsRepo;
+    @Autowired
+    private TimeLine timeLine;
 
     @PostMapping("/follow")
     public @ResponseBody String addFollow(@RequestParam Long users_master,@RequestParam Long users_follow){
@@ -46,6 +48,10 @@ public class MainController {
     @GetMapping(path = "/allt")
     public @ResponseBody Iterable<Tweets> getAllTweets(){
         return tweetsRepo.findAll();
+    }
+    @GetMapping(path = "/timeline")
+    public @ResponseBody Iterable<Tweets> getTimeLine(@RequestParam Integer uid){
+        return timeLine.findByTimeline(uid);
     }
 
 }
